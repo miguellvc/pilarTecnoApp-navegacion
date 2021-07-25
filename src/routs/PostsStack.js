@@ -3,6 +3,7 @@ import Posts from '../screens/Posts'
 import PostDetail from '../screens/PostDetail'
 import PostEdit from '../screens/PostEdit'
 import PostCreate from '../screens/PostCreate'
+import PostDelete from '../screens/PostDelete'
 import { createStackNavigator } from '@react-navigation/stack';
 const PostsStack = createStackNavigator();
 export const PostsStackScreen = () => {
@@ -12,6 +13,7 @@ return(
     <PostsStack.Screen name="PostDetail" component={PostDetail} />
     <PostsStack.Screen name="PostEdit" component={PostEdit} />
     <PostsStack.Screen name="PostCreate" component={PostCreate} />
+    <PostsStack.Screen name="PostDelete" component={PostDelete} />
 </PostsStack.Navigator>
 )
 }
