@@ -6,7 +6,6 @@ import auth from '@react-native-firebase/auth';
 import { GoogleSignin,  GoogleSigninButton } from '@react-native-google-signin/google-signin';
 GoogleSignin.configure({
     webClientId: '1027510867749-3udinmmhq2ivn8k47loj748qburgasav.apps.googleusercontent.com',
-    offlineAccess: true
   });
 
 
