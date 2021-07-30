@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "1027510867749",
-    "project_id": "pilartecno-dc1e2",
-    "storage_bucket": "pilartecno-dc1e2.appspot.com"
+    "project_number": "166766918892",
+    "project_id": "pilartecno2-baee4",
+    "storage_bucket": "pilartecno2-baee4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1027510867749:android:220409ad00af2fcae16ccc",
+        "mobilesdk_app_id": "1:166766918892:android:f72670febd3b239a6eb9c9",
         "android_client_info": {
           "package_name": "com.pilartectoapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1027510867749-3udinmmhq2ivn8k47loj748qburgasav.apps.googleusercontent.com",
+          "client_id": "166766918892-jv81nbq227v51vqf0n09j0evotd4lqhq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pilartectoapp",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "1027510867749-1pltvculnihm1bairh173hrd5f8v45cb.apps.googleusercontent.com",
+          "client_id": "166766918892-d6shqnlku0rhdba22bngv6jo040t4rcv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDdF1WuQoLMg3Ka-fIqdiGROX2Ay2hpN1Y"
+          "current_key": "AIzaSyDCgDJ9f1q90FQQEUIpm7Ru7UIvg68vUMw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1027510867749-1pltvculnihm1bairh173hrd5f8v45cb.apps.googleusercontent.com",
+              "client_id": "166766918892-d6shqnlku0rhdba22bngv6jo040t4rcv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
