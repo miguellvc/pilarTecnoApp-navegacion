@@ -9,7 +9,8 @@ import auth from '@react-native-firebase/auth';
 
 import { GoogleSignin,  GoogleSigninButton } from '@react-native-google-signin/google-signin';
 GoogleSignin.configure({
-    webClientId: "166766918892-d6shqnlku0rhdba22bngv6jo040t4rcv.apps.googleusercontent.com",
+    webClientId: "166766918892-llk2aeimplo0qgsboa8sk1co91fmv7ep.apps.googleusercontent.com",
+    
   });
 
  class Login extends React.Component {
