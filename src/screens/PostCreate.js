@@ -88,8 +88,7 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = dispatch => ({
-    createPost: (data) =>
-        dispatch(actions.posts.createPost(data)),
+    createPost: (data) => dispatch(actions.posts.createPost(data)),
 })
 
 const mapStateToProps = state => ({})

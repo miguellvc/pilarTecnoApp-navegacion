@@ -4,7 +4,7 @@ import { Tabs } from './Tabs'
 import Login from '../screens/Login'
 const Stack = createStackNavigator();
 export default AppStack = (props) => {
-    const isloged = false //variable que controla el login
+    const isloged = true //variable que controla el login
     return (
         <Stack.Navigator headerMode="none">
             {
