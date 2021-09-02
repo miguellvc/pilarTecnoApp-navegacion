@@ -7,14 +7,17 @@ import {
     ActivityIndicator,
     FlatList,
     View,
-    ImageBackground
+    Image 
 } from 'react-native';
-import { Button, Divider } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import { actions } from '../store'
 import { connect } from 'react-redux'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
+
+const image =  'https://www.norte.com/img/2018/11/parque-nacional-talampaya.jpg'
+
 class Posts extends React.Component {
     
     constructor(props) {
@@ -26,6 +29,7 @@ class Posts extends React.Component {
 
     componentDidMount = () => {
         this.props.getPosts()
+        console.log("desde post",  this.props.posts)
     }
 
     keyExtractor = (item, index) => index.toString()
@@ -33,20 +37,17 @@ class Posts extends React.Component {
     renderItem = ({ item }) => (
         <TouchableWithoutFeedback onPress={() =>
             this.props.navigation.navigate('PostDetail', { item })} >
-            <View style={{
-                margin: 20, backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 8,
-                padding: 5
-            }}>
+            <View style={styles.contentList}>
                 <View style={styles.titlecontainer}>
                     <Text style={styles.title}>
-                        {item.title}
+                        {item.name}
                     </Text>
                 </View>
-                <Divider />
-                <View style={styles.bodycontainer}>
-                    <Text style={styles.text}>
-                        {item.body}
-                    </Text>
+                <View>
+                        <Image
+                        source={{ uri: item.photo[0].url }}
+                        style={{ width: 360, height: 400,  borderRadius: 10 }}
+                        />
                 </View>
             </View>
         </TouchableWithoutFeedback>
@@ -67,12 +68,11 @@ class Posts extends React.Component {
                                     onPress={() => this.props.navigation.navigate('PostCreate')} />
                                 <FlatList
                                     keyExtractor={this.keyExtractor}
-                                    data={this.props.posts}
+                                    data={this.props.posts.touristSite}
                                     renderItem={this.renderItem}
                                 />
                             </View>
-                     
-                }
+                }    
             </SafeAreaView>
         )
     }
@@ -80,13 +80,14 @@ class Posts extends React.Component {
 const styles = StyleSheet.create({
     text: {
         fontSize: 14,
-        color: '#fff',
+        color: '#000000',
         textAlign: 'center'
     },
     title: {
+        fontFamily: 'Roboto',
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#fff',
+        color: '#000000',
         textAlign: 'center'
     },
     titlecontainer: {
@@ -101,6 +102,14 @@ const styles = StyleSheet.create({
         width: width / 2.5,
         borderRadius: 15,
         justifyContent: 'center',
+    },
+    contentList : {
+        margin: 20, 
+        padding: 5, 
+        shadowColor: "#000",
+        shadowOpacity: 0.53,
+        shadowRadius: 13.97,
+        elevation: 21,
     }
 })
 
@@ -109,6 +118,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-    posts: state.posts.posts,
+    posts: state.posts.posts
 })
 export default connect(mapStateToProps, mapDispatchToProps)((Posts))

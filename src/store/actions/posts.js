@@ -1,12 +1,21 @@
-import { FETCH_POSTS, POST_POSTS, DEL_POSTS, UPDATE_POSTS } from '../constants';
+import { FETCH_POSTS, FETCH_POST, POST_POSTS, DEL_POSTS, UPDATE_POSTS } from '../constants';
 
-import { fetchPosts, postPosts, deletePost, putPost } from '../../api';
+import { fetchPosts, fetchPost, postPosts, deletePost, putPost } from '../../api';
 
 
 const getPostsSucess = (data) => {
     
     return {
         type: FETCH_POSTS,
+        data
+    }
+
+}
+
+const getPostSucess = (data) => {
+    
+    return {
+        type: FETCH_POST,
         data
     }
 
@@ -37,7 +46,7 @@ const updatePostSuceess = (data) => {
 export const getPosts = () => (dispatch) => {
 
     return fetchPosts()
-        .then(([response, json]) => {
+        .then(([response, json]) => {        
             dispatch(getPostsSucess(json))
             return json
         })
@@ -45,7 +54,14 @@ export const getPosts = () => (dispatch) => {
 
 }
 
-export const getfetchComments = () => (dispatch) => {
+export const getPost = (id) => (dispatch) => {
+
+    return fetchPost(id)
+    .then(([response, json]) => {        
+        dispatch(getPostSucess(json))
+        return json
+    })
+    .catch((error) => console.log(error))  
 
 }
 
@@ -54,19 +70,25 @@ export const createPost = (data) => (dispatch) => {
     return postPosts(data)
         .then(([response, json]) => {
             if (response.ok === true) {
-                dispatch(createPostSuceess({ title, body }))
+                fetchPosts()
+                .then(([response, json]) => {        
+                    dispatch(getPostsSucess(json))
+                })
             }
             return json
         })
         .catch((error) => console.log(error))
 }
 
-export const delPost = (data) => (dispatch) => {
-    const { id } = data
-    return deletePost({ id })
+export const delPost = (id) => (dispatch) => {
+    return deletePost(id)
         .then(([response, json]) => {
             if (response.ok === true) {
-                dispatch(delPostSuceess({ data }))
+
+                fetchPosts()
+                .then(([response, json]) => {        
+                    dispatch(getPostsSucess(json))
+                })
             }
             return json
         })
@@ -77,9 +99,12 @@ export const updatePost = (data) => (dispatch) => {
     // const { id } = data
     return putPost(data)
         .then(([response, json]) => {
-            if (response.ok === true) {
-                dispatch(updatePostSuceess(data))
-            }
+           
+                fetchPosts()
+                .then(([response, json]) => {        
+                    dispatch(getPostsSucess(json))
+                })
+           
             return json
         })
         .catch((error) => console.log(error))

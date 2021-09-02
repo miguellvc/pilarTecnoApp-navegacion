@@ -31,9 +31,11 @@ class PostDelete extends React.Component {
 
     delete = () => {
 
-        const { body, id, title, userId } = this.state.post[0]; 
+        const { _id } = this.state.post[0]; 
 
-        this.props.deletePost({ id, body, title, userId }).then(() => {
+        console.log("id del post a eliminar", _id)
+
+        this.props.deletePost(_id).then(() => {
             this.props.navigation.navigate('Posts');
             console.log('post eliminado');
         })
@@ -75,8 +77,8 @@ class PostDelete extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    deletePost: (data) =>
-        dispatch(actions.posts.delPost(data)),
+    deletePost: (id) =>
+        dispatch(actions.posts.delPost(id)),
 })
 
 const mapStateToProps = state => ({})

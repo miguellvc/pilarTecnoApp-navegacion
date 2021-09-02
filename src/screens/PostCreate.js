@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
+    ScrollView,
     SafeAreaView,
     Dimensions,
     StyleSheet,
-    ImageBackground,
 } from 'react-native';
 import { Input, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
@@ -16,26 +16,117 @@ class PostCreate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            body: ''
+            name: '',
+            location: '', 
+            lat: '', 
+            long: '',
+            photoUrl: '',
+            photoTitle: '',
+            photoDescription: '',
+            description: '',
+            tags: ''
         }
     }
 
     _send = () => {
-        const { title, body } = this.state
         ///VALIDACIONES
-        this.props.createPost({ title, body }).then(() => {
+        const  { name,
+                location, 
+                lat, 
+                long, 
+                description,
+                tags } = this.state
+
+        const touristSite = {
+            name,
+            location,
+            lat,
+            long,
+            description, 
+            tags,
+            photo: [
+                {
+                    url: this.state.photoUrl,
+                    title: this.state.photoTitle,
+                    description: this.state.photoDescription
+                }
+            ]
+        }
+        // console.log(touristSite);
+
+        this.props.createPost(touristSite).then((res) => {
             this.props.navigation.goBack()
+            console.log(res)
         })
     }
 
     render() {
         return (
             <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                 <ScrollView >
                 {/* <ImageBackground
                     style={[styles.content, { height, width }]}
                     source={require('../assets/images/fondo7.jpg')}
                 > */}
+                    <Input
+                        placeholder='Nombre del sitio'
+                        inputContainerStyle={{
+                            width: width * 0.8, alignItems: 'flex-start',
+                            alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0.5)', pading: 15
+                        }}
+                        inputStyle={{ color: 'white', marginLeft: 15 }}
+                        placeholderTextColor='#ccc'
+                        value={this.state.title}
+                        onChangeText={(value) => this.setState({ name: value })}
+                    />
+                    <Input
+                        placeholder='Localidad'
+                        inputContainerStyle={{
+                            width: width * 0.8, alignItems: 'flex-start',
+                            alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0.5)', pading: 15
+                        }}
+                        inputStyle={{ color: 'white', marginLeft: 15 }}
+                        placeholderTextColor='#ccc'
+                        value={this.state.title}
+                        onChangeText={(value) => this.setState({ location: value })}
+                    />
+                     <Input
+                        placeholder='Latitud'
+                        inputContainerStyle={{
+                            width: width * 0.8, alignItems: 'flex-start',
+                            alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0.5)', pading: 15
+                        }}
+                        inputStyle={{ color: 'white', marginLeft: 15 }}
+                        placeholderTextColor='#ccc'
+                        value={this.state.title}
+                        onChangeText={(value) => this.setState({ lat: value })}
+                    />
+
+                    <Input
+                        placeholder='Longitud'
+                        inputContainerStyle={{
+                            width: width * 0.8, alignItems: 'flex-start',
+                            alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0.5)', pading: 15
+                        }}
+                        inputStyle={{ color: 'white', marginLeft: 15 }}
+                        placeholderTextColor='#ccc'
+                        value={this.state.title}
+                        onChangeText={(value) => this.setState({ long: value })}
+                    />
+                 
+                    <Input
+                        placeholder='Url Foto'
+                        inputContainerStyle={{
+                            width: width * 0.8, alignItems: 'flex-start',
+                            alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0.5)', pading: 15
+                        }}
+                        inputStyle={{ color: 'white', marginLeft: 15 }}
+                        placeholderTextColor='#ccc'
+                        value={this.state.title}
+                        onChangeText={(value) => this.setState({photoUrl: value })}
+                    />
+
+                    
                     <Input
                         placeholder='Titulo'
                         inputContainerStyle={{
@@ -45,8 +136,33 @@ class PostCreate extends React.Component {
                         inputStyle={{ color: 'white', marginLeft: 15 }}
                         placeholderTextColor='#ccc'
                         value={this.state.title}
-                        onChangeText={(value) => this.setState({ title: value })}
+                        onChangeText={(value) => this.setState({ photoTitle: value })}
                     />
+                    
+                    <Input
+                        placeholder='Descripcion'
+                        inputContainerStyle={{
+                            width: width * 0.8, alignItems: 'flex-start',
+                            alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0.5)', pading: 15
+                        }}
+                        inputStyle={{ color: 'white', marginLeft: 15 }}
+                        placeholderTextColor='#ccc'
+                        value={this.state.title}
+                        onChangeText={(value) => this.setState({ photoDescription: value })}
+                    />
+
+                    <Input
+                        placeholder='Tags'
+                        inputContainerStyle={{
+                            width: width * 0.8, alignItems: 'flex-start',
+                            alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0.5)', pading: 15
+                        }}
+                        inputStyle={{ color: 'white', marginLeft: 15 }}
+                        placeholderTextColor='#ccc'
+                        value={this.state.title}
+                        onChangeText={(value) => this.setState({ tags: value })}
+                    />  
+
                     <Input
                         placeholder='Descripcion'
                         inputContainerStyle={{
@@ -57,7 +173,7 @@ class PostCreate extends React.Component {
                         inputStyle={{ color: 'white', marginLeft: 15 }}
                         placeholderTextColor='#ccc'
                         value={this.state.body}
-                        onChangeText={(value) => this.setState({ body: value })}
+                        onChangeText={(value) => this.setState({ description: value })}
                         multiline
                         numberOfLines={2}
                     />
@@ -65,6 +181,7 @@ class PostCreate extends React.Component {
                         style={{ width: width * 0.8 }} />
                 {/* </ImageBackground> */}
                 {/* </View> */}
+                </ScrollView>
             </SafeAreaView>
         )
     }

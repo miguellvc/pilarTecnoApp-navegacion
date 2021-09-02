@@ -2,6 +2,8 @@ export const LOG_IN = "LOG_IN";
 
 export const FETCH_POSTS = 'FETCH_POSTS'; 
 
+export const FETCH_POST = 'FETCH_POST';
+
 export const POST_POSTS = 'POST_POSTS';
 
 export const DEL_POSTS = 'DEL_POSTS';  

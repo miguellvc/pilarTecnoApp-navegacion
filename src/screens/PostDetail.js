@@ -1,14 +1,13 @@
 import React from 'react';
-
-import { fetchComments } from '../api';
-
 import {
+    SafeAreaView,
     Text,
     View,
+    Image,
+    StyleSheet
 } from 'react-native';
 
 import { Card, Button,  } from 'react-native-elements'
-
 
 export default class PostDetail extends React.Component {
 
@@ -18,76 +17,63 @@ export default class PostDetail extends React.Component {
 
         this.state = {
             post: [],
-            postsComment: null
         }
     }
-    componentDidMount() {
 
-        const { item } = this.props.route.params
-
-        this.setState({ post: [item] })
-
-        fetchComments(item)
-            .then(resp => {
-                this.setState({ postsComment: resp[1] })
-            })
-    }
 
     render() {
+        const { item } = this.props.route.params
         return (
-
-            this.state.post ?
-                <View>
-                   
-                    {this.state.post.map(item => {
-                        return (
-                            
-                            <View key={item.id}>
+            <SafeAreaView style={{
+                flex: 1, justifyContent: 'center', alignItems: 'center',
+                backgroundColor: 'white'
+            }}>
+                     <View key={item._id}>
                                 <Card>
-                                    <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
-                                    <Text>{item.body}</Text>
+                                    <Text style={styles.title}>
+                                        {item.name}
+                                    </Text>
+
+                                    <Text>
+                                        {item.description}
+                                    </Text>
+                                    
+                                    <Image
+                                        source={{ uri: item.photo[0].url }}
+                                        style={{ width: 360, height: 400,  borderRadius: 10 }}
+                                    />
                                     <View style={{
                                         paddingTop: 5,
                                         paddingLeft: 15,
                                         flexDirection: "row", justifyContent: 'flex-end'
                                     }}>
-                                        <Button onPress={() =>
-                                            this.props.navigation.navigate('PostEdit', { item })} title='Editar' style={{ fontSize: 20 }}></Button>
-                                        <Button onPress={() =>
-                                            this.props.navigation.navigate('PostDelete', { item })} title='Eliminar'>Editar</Button>
+                                    
+                                    <Button onPress={() =>
+                                            this.props.navigation.navigate('PostEdit', { item })} title='Editar'>
+                                    </Button>
+                                    <Button onPress={() =>
+                                            this.props.navigation.navigate('PostDelete', { item })} title='Eliminar'>
+                                    </Button>
                                     </View>
                                 </Card>
-                                <Text style={{ padding: 20, fontSize: 20 }}>Comentarios</Text>
-                                {this.state.postsComment ?
-                                    this.state.postsComment.map((comments, i) => {
-                                        return <Card key={i}>
-
-                                            <Text style={{ fontWeight: 'bold' }}>
-                                                {comments.name}
-                                            </Text>
-                                            <Text>
-                                                {comments.body}
-                                            </Text>
-                                        </Card>
-                                    })
-                                    :
-                                    <Text>cargando comentarios</Text>
-                                }
-                            </View>
-                        )
-                    })}
-                </View>
-
-
-                :
-                <View>
-                    <Text>
-                        cargando data
-                    </Text>
-                </View>
+                        
+                     </View>
+            </SafeAreaView>
         )
 
 
     }
 
 }
+
+const styles = StyleSheet.create({
+
+    title: {
+        fontFamily: 'Roboto',
+        fontSize: 25,
+        marginBottom: 5,
+        fontWeight: 'bold',
+        color: '#000000',
+        textAlign: 'center'
+    },
+})
